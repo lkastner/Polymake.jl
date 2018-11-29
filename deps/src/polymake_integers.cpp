@@ -97,7 +97,9 @@ void polymake_module_add_integer(jlcxx::Module& polymake)
                 [](int64_t a, pm::Integer& b) {
                     return static_cast<long>(a) % b;
                 })
-        .method("rem", [](int32_t a, pm::Integer& b) { return a % b; });
+        .method("rem", [](int32_t a, pm::Integer& b) { return a % b; })
+        .method("take", [](pm::perl::Object p, const std::string& s,
+                           pm::Integer& a){p.take(s) << a;});
 
     polymake.method("new_pm_Integer_from_bigint", new_integer_from_bigint);
     polymake.method("to_pm_Integer", [](pm::perl::PropertyValue pv) {
